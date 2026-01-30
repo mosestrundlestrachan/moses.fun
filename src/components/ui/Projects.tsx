@@ -2,6 +2,7 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import { useRef, useState } from "react";
 
 const articles = [
@@ -22,7 +23,7 @@ const articles = [
         category: "Infrastructure",
         date: "2023",
         excerpt: "CLI tool for preventing schema drift in data pipelines.",
-        src: "https://images.unsplash.com/photo-1558494949-efc02570fbc2?q=80&w=2000&auto=format&fit=crop",
+        src: "https://images.unsplash.com/photo-1544197150-b99a580bbcbf?q=80&w=2000&auto=format&fit=crop",
         link: "#",
     },
     {
@@ -138,12 +139,20 @@ export default function Projects() {
                 transition={{ duration: 0.2 }}
             >
                 {articles.map((article, i) => (
-                    <img
+                    <div
                         key={article.id}
-                        src={article.src}
-                        alt={article.title}
-                        className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${activeProject === i ? "opacity-100" : "opacity-0"}`}
-                    />
+                        className={`absolute top-0 left-0 w-full h-full transition-opacity duration-300 ${activeProject === i ? "opacity-100" : "opacity-0"}`}
+                    >
+                        <Image
+                            src={article.src}
+                            alt={article.title}
+                            fill
+                            className="object-cover"
+                            quality={100}
+                            priority
+                            sizes="400px"
+                        />
+                    </div>
                 ))}
             </motion.div>
         </section>
